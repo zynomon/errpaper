@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>err paper - Wallpaper Repository</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+            background-color: #0d1117;
+            color: #e6edf3;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .glow {
+            text-shadow: 0 0 5px rgba(230, 237, 243, 0.8), 0 0 10px rgba(230, 237, 243, 0.6), 0 0 15px rgba(230, 237, 243, 0.4);
+        }
+
+        .header {
+            background-color: #161b22;
+            border-bottom: 1px solid #30363d;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #e6edf3;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: "📁";
+            font-size: 24px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-link {
+            color: #7d8590;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #e6edf3;
+            background-color: #21262d;
+            text-shadow: 0 0 3px rgba(230, 237, 243, 0.6);
+        }
+
+        .nav-link.active {
+            color: #e6edf3;
+            text-shadow: 0 0 3px rgba(230, 237, 243, 0.6);
+        }
+
+        .auth-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-status {
+            font-size: 14px;
+            color: #7d8590;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-status.authenticated {
+            color: #238636;
+            text-shadow: 0 0 3px rgba(35, 134, 54, 0.6);
+        }
+
+        .auth-btn {
+            padding: 6px 12px;
+            background-color: transparent;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #e6edf3;
+            cursor: pointer;
+            font-size: 12px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .auth-btn:hover {
+            background-color: #21262d;
+            border-color: #8b949e;
+            text-shadow: 0 0 3px rgba(230, 237, 243, 0.6);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-shadow: 0 0 8px rgba(230, 237, 243, 0.8), 0 0 16px rgba(230, 237, 243, 0.4);
+        }
+
+        .page-description {
+            color: #7d8590;
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: #7d8590;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stat-number {
+            font-weight: 600;
+            color: #e6edf3;
+            text-shadow: 0 0 3px rgba(230, 237, 243, 0.6);
+        }
+
+        .upload-section {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .upload-section.hidden {
+            display: none;
+        }
+
+        .upload-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .upload-area {
+            border: 2px dashed #30363d;
+            border-radius: 8px;
+            padding: 48px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: #0d1117;
+        }
+
+        .upload-area:hover {
+            border-color: #21262d;
+            background-color: #161b22;
+            box-shadow: 0 0 15px rgba(230, 237, 243, 0.1);
+        }
+
+        .upload-area.dragover {
+            border-color: #1f6feb;
+            background-color: rgba(31, 111, 235, 0.1);
+            box-shadow: 0 0 20px rgba(31, 111, 235, 0.3);
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+
+        .upload-text {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .upload-subtext {
+            color: #7d8590;
+            font-size: 14px;
+        }
+
+        .auth-notice {
+            text-align: center;
+            padding: 48px 24px;
+            color: #7d8590;
+        }
+
+        .auth-notice-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 300px;
+            flex: 1;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 8px 12px 8px 36px;
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #e6edf3;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .search-box::placeholder {
+            color: #7d8590;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #1f6feb;
+            box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.3), 0 0 8px rgba(31, 111, 235, 0.5);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7d8590;
+            font-size: 16px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            background-color: transparent;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #7d8590;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            background-color: #21262d;
+            border-color: #8b949e;
+            text-shadow: 0 0 3px rgba(230, 237, 243, 0.6);
+        }
+
+        .filter-btn.active {
+            background-color: #1f6feb;
+            border-color: #1f6feb;
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .wallpaper-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .wallpaper-card:hover {
+            border-color: #8b949e;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(230, 237, 243, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .wallpaper-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: opacity 0.2s ease;
+        }
+
+        .wallpaper-card:hover .wallpaper-img {
+            opacity: 0.9;
+        }
+
+        .wallpaper-info {
+            padding: 16px;
+        }
+
+        .wallpaper-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e6edf3;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: 0 0 3px rgba(230, 237, 243, 0.6);
+        }
+
+        .wallpaper-title::before {
+            content: "🖼️";
+            font-size: 14px;
+        }
+
+        .wallpaper-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: #7d8590;
+        }
+
+        .wallpaper-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: #21262d;
+            color: #7d8590;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            border: 1px solid #30363d;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 8px 16px;
+            background-color: #238636;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background-color: #2ea043;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .download-btn::before {
+            content: "⬇️";
+            font-size: 14px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 2% auto;
+            width: 90%;
+            max-width: 1000px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(230, 237, 243, 0.1);
+        }
+
+        .modal-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            text-shadow: 0 0 3px rgba(230, 237, 243, 0.6);
+        }
+
+        .close {
+            background: none;
+            border: none;
+            color: #7d8590;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .close:hover {
+            background-color: #21262d;
+            color: #e6edf3;
+            text-shadow: 0 0 3px rgba(230, 237, 243, 0.6);
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            background-color: #0d1117;
+        }
+
+        .modal-info {
+            padding: 24px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: #238636;
+            color: #ffffff;
+            border-color: #238636;
+        }
+
+        .btn-primary:hover {
+            background-color: #2ea043;
+            border-color: #2ea043;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #e6edf3;
+            border-color: #30363d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #21262d;
+            border-color: #8b949e;
+            text-shadow: 0 0 3px rgba(230, 237, 243, 0.6);
+        }
+
+        .no-wallpapers {
+            text-align: center;
+            padding: 64px 24px;
+            color: #7d8590;
+        }
+
+        .empty-icon {
+            font-size: 64px;
+            opacity: 0.3;
+            margin-bottom: 16px;
+        }
+
+        .empty-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e6edf3;
+            text-shadow: 0 0 5px rgba(230, 237, 243, 0.6);
+        }
+
+        .auth-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .auth-modal-content {
+            position: relative;
+            margin: 10% auto;
+            width: 90%;
+            max-width: 400px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 32px;
+            box-shadow: 0 0 30px rgba(230, 237, 243, 0.1);
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .auth-input {
+            padding: 12px;
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #e6edf3;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .auth-input::placeholder {
+            color: #7d8590;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: #1f6feb;
+            box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.3);
+        }
+
+        .auth-submit {
+            padding: 12px;
+            background-color: #238636;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .auth-submit:hover {
+            background-color: #2ea043;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .github-config {
+            display: none;
+        }
+
+        .footer {
+            margin-top: 64px;
+            padding: 32px 0;
+            border-top: 1px solid #30363d;
+            text-align: center;
+            color: #7d8590;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+            
+            .header-content {
+                padding: 0 16px;
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                overflow-x: auto;
+                width: 100%;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-container {
+                max-width: none;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <a href="#" class="logo glow">err paper</a>
+            <nav class="nav-links">
+                <a href="#" class="nav-link active">Repository</a>
+                <a href="#" class="nav-link">Trending</a>
+                <a href="#" class="nav-link">Collections</a>
+                <a href="#" class="nav-link">Setup</a>
+            </nav>
+            <div class="auth-section">
+                <div class="user-status authenticated">🌟 Manual curation</div>
+                <span class="auth-btn" style="cursor: default; opacity: 0.7;">Read-only</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+
+        <div class="page-header">
+            <h1 class="page-title glow">err paper</h1>
+            <p class="page-description">A minimal repository for sharing and discovering wallpapers</p>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    📁 <span class="stat-number" id="totalWallpapers">0</span> wallpapers
+                </div>
+                <div class="stat-item">
+                    ⭐ <span class="stat-number" id="totalDownloads">0</span> downloads
+                </div>
+                <div class="stat-item">
+                    👥 <span class="stat-number">1</span> contributor
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload section removed - manual curation only -->
+        <div class="upload-section" style="display: none;">
+        </div>
+
+        <div class="controls">
+            <div class="search-container">
+                <div class="search-icon">🔍</div>
+                <input type="text" id="searchBox" class="search-box" placeholder="Search wallpapers...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="nature">Nature</button>
+                <button class="filter-btn" data-filter="abstract">Abstract</button>
+                <button class="filter-btn" data-filter="minimal">Minimal</button>
+                <button class="filter-btn" data-filter="dark">Dark</button>
+            </div>
+        </div>
+
+        <div class="gallery" id="gallery">
+            <div class="no-wallpapers">
+                <div class="empty-icon">📂</div>
+                <div class="empty-title glow">No wallpapers yet</div>
+                <p>Upload your first wallpaper to get started!</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Built with ❤️ for wallpaper enthusiasts • Hosted on GitHub Pages</p>
+        </div>
+    </div>
+
+    <!-- Wallpaper Modal -->
+    <div id="wallpaperModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title glow" id="modalTitle">Wallpaper Details</div>
+                <button class="close" onclick="closeModal()">&times;</button>
+            </div>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <div class="modal-info">
+                <div id="modalDescription"></div>
+                <div id="modalMeta"></div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" onclick="downloadWallpaper()">
+                        ⬇️ Download
+                    </button>
+                    <button class="btn btn-secondary" onclick="copyLink()">
+                        🔗 Copy Link
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-modal-content">
+            <div class="modal-header">
+                <div class="modal-title glow">Admin Authentication</div>
+                <button class="close" onclick="closeAuthModal()">&times;</button>
+            </div>
+            <form class="auth-form" onsubmit="authenticate(event)">
+                <input type="password" class="auth-input" placeholder="Admin Password" id="passwordInput" required>
+                <button type="submit" class="auth-submit">Authenticate</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ================================================================
+        // 🎨 PARTICLES.JS BACKGROUND CONFIGURATION
+        // ================================================================
+        // 🎨 PARTICLES.JS BACKGROUND CONFIGURATION
+        // ================================================================
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#ffffff'
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: {
+                        enable: false,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 40,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#ffffff',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true
+        });
+ 
+
+        const wallpapersData = [
+                   {
+                id: 1,
+                title: 'Neon Cyberpunk City',
+                url: 'https://media.tenor.com/KT3b_vMcC7AAAAAd/cyberpunk-neon-city.gif',
+                dimensions: '1920 × 1080',
+                size: '4.2 MB',
+                uploadedAt: '2024-12-01',
+                downloads: 245,
+                tags: ['cyberpunk', 'neon', 'dark', 'animated']
+            },
+            {
+                id: 2,
+                title: 'Mountain Landscape',
+                url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
+                dimensions: '1920 × 1080',
+                size: '2.4 MB',
+                uploadedAt: '2024-11-28',
+                downloads: 156,
+                tags: ['nature', 'landscape', 'mountains']
+            },
+            {
+                id: 3,
+                title: 'Abstract Gradient',
+                url: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=1920&h=1080&fit=crop',
+                dimensions: '1920 × 1080',
+                size: '1.8 MB',
+                uploadedAt: '2024-11-25',
+                downloads: 89,
+                tags: ['abstract', 'minimal', 'gradient']
+            }
+
+            
