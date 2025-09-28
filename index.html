@@ -777,146 +777,143 @@
         </div>
     </div>
 
-    <script>
-        // ================================================================
-        // 🎨 PARTICLES.JS BACKGROUND CONFIGURATION
-        // ================================================================
-        // 🎨 PARTICLES.JS BACKGROUND CONFIGURATION
-        // ================================================================
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: '#ffffff'
-                },
-                shape: {
-                    type: 'circle',
-                    stroke: {
-                        width: 0,
-                        color: '#000000'
-                    }
-                },
-                opacity: {
-                    value: 0.5,
-                    random: false,
-                    anim: {
-                        enable: false,
-                        speed: 1,
-                        opacity_min: 0.1,
-                        sync: false
-                    }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: {
-                        enable: false,
-                        speed: 40,
-                        size_min: 0.1,
-                        sync: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#ffffff',
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 6,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false,
-                    attract: {
-                        enable: false,
-                        rotateX: 600,
-                        rotateY: 1200
-                    }
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'repulse'
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: 'push'
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 400,
-                        line_linked: {
-                            opacity: 1
-                        }
-                    },
-                    bubble: {
-                        distance: 400,
-                        size: 40,
-                        duration: 2,
-                        opacity: 8,
-                        speed: 3
-                    },
-                    repulse: {
-                        distance: 200,
-                        duration: 0.4
-                    },
-                    push: {
-                        particles_nb: 4
-                    },
-                    remove: {
-                        particles_nb: 2
-                    }
-                }
-            },
-            retina_detect: true
-        });
- 
+  <script>
+  // Sample Wallpapers Data
+  const wallpapers = [
+    {
+      title: "Forest Mist",
+      image: "https://picsum.photos/id/1018/800/600",
+      tags: ["nature", "dark"],
+      downloads: 122
+    },
+    {
+      title: "Neon Geometry",
+      image: "https://picsum.photos/id/1015/800/600",
+      tags: ["abstract", "dark"],
+      downloads: 88
+    },
+    {
+      title: "Minimal Sun",
+      image: "https://picsum.photos/id/1025/800/600",
+      tags: ["minimal", "nature"],
+      downloads: 47
+    }
+  ];
 
-        const wallpapersData = [
-                   {
-                id: 1,
-                title: 'Neon Cyberpunk City',
-                url: 'https://media.tenor.com/KT3b_vMcC7AAAAAd/cyberpunk-neon-city.gif',
-                dimensions: '1920 × 1080',
-                size: '4.2 MB',
-                uploadedAt: '2024-12-01',
-                downloads: 245,
-                tags: ['cyberpunk', 'neon', 'dark', 'animated']
-            },
-            {
-                id: 2,
-                title: 'Mountain Landscape',
-                url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop',
-                dimensions: '1920 × 1080',
-                size: '2.4 MB',
-                uploadedAt: '2024-11-28',
-                downloads: 156,
-                tags: ['nature', 'landscape', 'mountains']
-            },
-            {
-                id: 3,
-                title: 'Abstract Gradient',
-                url: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=1920&h=1080&fit=crop',
-                dimensions: '1920 × 1080',
-                size: '1.8 MB',
-                uploadedAt: '2024-11-25',
-                downloads: 89,
-                tags: ['abstract', 'minimal', 'gradient']
-            }
+  const gallery = document.getElementById("gallery");
+  const totalWallpapers = document.getElementById("totalWallpapers");
+  const totalDownloads = document.getElementById("totalDownloads");
+  const searchBox = document.getElementById("searchBox");
 
-            
+  let filteredWallpapers = wallpapers;
+
+  function renderGallery(items) {
+    gallery.innerHTML = "";
+
+    if (items.length === 0) {
+      gallery.innerHTML = `
+        <div class="no-wallpapers">
+          <div class="empty-icon">📂</div>
+          <div class="empty-title glow">No wallpapers found</div>
+          <p>Try a different search or tag filter.</p>
+        </div>
+      `;
+      return;
+    }
+
+    items.forEach(wallpaper => {
+      const card = document.createElement("div");
+      card.className = "wallpaper-card";
+      card.innerHTML = `
+        <img src="${wallpaper.image}" class="wallpaper-img" alt="${wallpaper.title}">
+        <div class="wallpaper-info">
+          <div class="wallpaper-title">${wallpaper.title}</div>
+          <div class="wallpaper-meta">
+            <span>⬇️ ${wallpaper.downloads}</span>
+          </div>
+          <div class="wallpaper-tags">
+            ${wallpaper.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
+          </div>
+          <button class="download-btn" data-image="${wallpaper.image}" data-title="${wallpaper.title}">⬇️ Download</button>
+        </div>
+      `;
+
+      card.querySelector(".wallpaper-img").addEventListener("click", () => openModal(wallpaper));
+      card.querySelector(".download-btn").addEventListener("click", () => downloadImage(wallpaper.image, wallpaper.title));
+      gallery.appendChild(card);
+    });
+
+    totalWallpapers.textContent = wallpapers.length;
+    totalDownloads.textContent = wallpapers.reduce((acc, w) => acc + w.downloads, 0);
+  }
+
+  function downloadImage(url, name) {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = name + ".jpg";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  function openModal(wallpaper) {
+    document.getElementById("modalImage").src = wallpaper.image;
+    document.getElementById("modalTitle").textContent = wallpaper.title;
+    document.getElementById("modalDescription").innerHTML = `<p>Tags: ${wallpaper.tags.join(", ")}</p>`;
+    document.getElementById("modalMeta").innerHTML = `⬇️ ${wallpaper.downloads} downloads`;
+    document.getElementById("wallpaperModal").style.display = "block";
+
+    // Store for later download or copy
+    document.getElementById("wallpaperModal").dataset.image = wallpaper.image;
+    document.getElementById("wallpaperModal").dataset.title = wallpaper.title;
+  }
+
+  function closeModal() {
+    document.getElementById("wallpaperModal").style.display = "none";
+  }
+
+  function downloadWallpaper() {
+    const modal = document.getElementById("wallpaperModal");
+    downloadImage(modal.dataset.image, modal.dataset.title);
+  }
+
+  function copyLink() {
+    const modal = document.getElementById("wallpaperModal");
+    navigator.clipboard.writeText(modal.dataset.image)
+      .then(() => alert("Link copied to clipboard!"))
+      .catch(() => alert("Failed to copy link."));
+  }
+
+  function filterByCategory(category) {
+    const buttons = document.querySelectorAll(".filter-btn");
+    buttons.forEach(btn => btn.classList.remove("active"));
+    document.querySelector(`[data-filter="${category}"]`).classList.add("active");
+
+    if (category === "all") {
+      filteredWallpapers = wallpapers;
+    } else {
+      filteredWallpapers = wallpapers.filter(w => w.tags.includes(category));
+    }
+
+    searchBox.value = "";
+    renderGallery(filteredWallpapers);
+  }
+
+  function filterBySearch(query) {
+    const results = filteredWallpapers.filter(w =>
+      w.title.toLowerCase().includes(query.toLowerCase())
+    );
+    renderGallery(results);
+  }
+
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => filterByCategory(btn.dataset.filter));
+  });
+
+  searchBox.addEventListener("input", e => filterBySearch(e.target.value));
+
+  // Initial render
+  renderGallery(wallpapers);
+</script>
+
+      
