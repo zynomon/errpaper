@@ -1,0 +1,17 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "zynomon@proton.me",
+                "Name": "Zynomon Aelius",
+                "Name[ar]": "زينومون إيلوس",
+                "Name[bn]": "ভোর সূর্যগ्रहণ"
+            }
+        ],
+        "Id": "EclipseAtDawn",
+        "License": "LGPLv3",
+        "Name": "Eclipse at Dawn",
+        "Name[ar]": "كسوف عند الفجر",
+        "Name[bn]": "ভোর সূর্যগৃহণ"
+    }
+}

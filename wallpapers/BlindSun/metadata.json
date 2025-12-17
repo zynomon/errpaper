@@ -1,0 +1,14 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "zynomon@proton.me",
+                "Name": "Zynomon Aelius"
+            }
+        ],
+        "Id": "blindSun",
+        "License": "CC-BY-SA-4.0",
+        "Name": "Blind sun"
+        
+    }
+}

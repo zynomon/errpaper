@@ -1,0 +1,14 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "zonexcop@gmail.com",
+                "Name": "Zynomon Aelius"
+            }
+        ],
+        "Id": "homerr",
+        "License": "CC-BY-SA-4.0",
+        "Name": "Define error"
+        
+    }
+}

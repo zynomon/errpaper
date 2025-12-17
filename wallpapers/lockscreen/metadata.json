@@ -1,0 +1,13 @@
+{
+    "KPlugin": {
+        "Name": "Define error lockscreen",
+        "Id": "Ceratopsian",
+        "License": "GPLv2+",
+        "Authors": [
+            {
+                "Name": "Zynomon Aelius",
+                "Email": "zonexcop@gmail.com"
+            }
+        ]
+    }
+}

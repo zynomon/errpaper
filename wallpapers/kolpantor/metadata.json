@@ -1,0 +1,14 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "zonexcop@gmail.com",
+                "Name": "Zynomon Aelius"
+            }
+        ],
+        "Id": "kolpantor",
+        "License": "CC-BY-SA-4.0",
+        "Name": "Kolpantor"
+        // a wallpaper inspired by the voxel gen game that i made
+    }
+}

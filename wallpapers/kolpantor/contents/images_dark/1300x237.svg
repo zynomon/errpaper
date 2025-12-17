@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="3840"
+   height="2160"
+   viewBox="0 0 3840 2160"
+   version="1.1"
+   id="svg1"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient52">
+      <stop
+         style="stop-color:#636363;stop-opacity:0;"
+         offset="0"
+         id="stop51" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0.26872247;"
+         offset="1"
+         id="stop52" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient49">
+      <stop
+         style="stop-color:#636363;stop-opacity:1;"
+         offset="0"
+         id="stop49" />
+      <stop
+         style="stop-color:#242424;stop-opacity:1;"
+         offset="1"
+         id="stop50" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient43">
+      <stop
+         style="stop-color:#3e8213;stop-opacity:1;"
+         offset="0"
+         id="stop44" />
+      <stop
+         style="stop-color:#000f00;stop-opacity:1;"
+         offset="1"
+         id="stop45" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient23">
+      <stop
+         style="stop-color:#999999;stop-opacity:1;"
+         offset="0.60912055"
+         id="stop23" />
+      <stop
+         style="stop-color:#464646;stop-opacity:1;"
+         offset="0.68403912"
+         id="stop24" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient23"
+       id="linearGradient24"
+       x1="3360.3267"
+       y1="1182.8953"
+       x2="3578.7175"
+       y2="735.1275"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       xlink:href="#linearGradient43"
+       id="radialGradient45"
+       cx="1629.9429"
+       cy="1451.257"
+       fx="1629.9429"
+       fy="1451.257"
+       r="1926.9193"
+       gradientTransform="matrix(1.0020545,-0.02854593,0.01155858,0.4057434,-11.383967,960.01266)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       xlink:href="#linearGradient49"
+       id="linearGradient50"
+       x1="3401.623"
+       y1="1039.8488"
+       x2="3622.1599"
+       y2="1018.4979"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter50"
+       x="-0.23746256"
+       y="-0.71908201"
+       width="1.4749251"
+       height="2.438164">
+      <feGaussianBlur
+         stdDeviation="381.30934"
+         id="feGaussianBlur50" />
+    </filter>
+    <radialGradient
+       xlink:href="#linearGradient43"
+       id="radialGradient50"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.97872051,-0.21687383,0.15006273,0.67721154,-174.35601,873.00635)"
+       cx="1629.9429"
+       cy="1451.257"
+       fx="1629.9429"
+       fy="1451.257"
+       r="1926.9193" />
+    <linearGradient
+       xlink:href="#linearGradient52"
+       id="linearGradient51"
+       gradientUnits="userSpaceOnUse"
+       x1="3513.9072"
+       y1="944.6593"
+       x2="3528.7646"
+       y2="1025.6149"
+       gradientTransform="matrix(0.84775544,0,0,1,541.02153,-7.1169687)" />
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter52"
+       x="-0.35398906"
+       y="-0.3653351"
+       width="1.7080488"
+       height="1.7307982">
+      <feGaussianBlur
+         stdDeviation="62.278026"
+         id="feGaussianBlur52" />
+    </filter>
+  </defs>
+  <g
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#000000;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.6"
+       id="rect1"
+       width="3860.9556"
+       height="2177.7925"
+       x="-10.675453"
+       y="-10.675453" />
+    <path
+       style="opacity:1;fill:url(#radialGradient45);fill-opacity:1;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.6"
+       d="M 0,2170.6755 C 1236.7314,1161.9982 2531.9855,868.59788 3853.8386,900.29654 l -3.5585,1270.37896 z"
+       id="path1" />
+    <path
+       style="opacity:1;fill:url(#radialGradient50);fill-opacity:1;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.6;filter:url(#filter50)"
+       d="M 0,2170.6755 C 1236.7314,1161.9982 2531.9855,868.59788 3853.8386,900.29654 l -3.5585,1270.37896 z"
+       id="path50" />
+    <g
+       id="g52"
+       transform="matrix(0.33447651,0,0,0.39495635,2428.0533,662.17005)">
+      <path
+         id="path20"
+         style="opacity:1;fill:#6c6c6c;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.6"
+         d="m 3401.7069,949.7227 -99.329,-4.97745 -0.046,86.24375 106.9288,63.428 z" />
+      <path
+         id="path19"
+         style="opacity:1;fill:url(#linearGradient50);fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.6"
+         d="m 3409.2612,1094.417 -7.5543,-144.6943 204.5179,-12.39971 -1.8179,116.00391 z" />
+      <path
+         style="opacity:1;fill:url(#linearGradient24);fill-rule:evenodd;stroke-width:1.42119;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.6"
+         d="m 3263.1301,945.60848 124.932,68.55942 148.7233,-72.33612 111.5505,18.20366 -118.203,-63.2806 -98.6596,-18.33034 z"
+         id="path23" />
+      <path
+         id="path51"
+         style="opacity:1;fill:url(#linearGradient51);fill-rule:evenodd;stroke-width:0.920736;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.6"
+         d="m 3509.5279,1073.0661 0.7127,-88.64818 41.7173,-7.9516 1.1277,86.64638 z" />
+    </g>
+    <ellipse
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:15.404;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.6;stroke-dasharray:30.808, 15.404, 7.702, 15.404;stroke-dashoffset:0;stroke-opacity:1"
+       id="path52"
+       cx="476.83688"
+       cy="391.43335"
+       rx="227.74301"
+       ry="220.62602" />
+    <ellipse
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:23.604;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.6;stroke-dasharray:94.416, 23.604;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter52)"
+       id="ellipse52"
+       cx="476.83688"
+       cy="391.43335"
+       rx="227.74301"
+       ry="220.62602" />
+  </g>
+</svg>
